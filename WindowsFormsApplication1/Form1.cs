@@ -39,8 +39,7 @@ namespace WindowsFormsApplication1
                 using (Stream responseStream = errorResponse.GetResponseStream())
                 {
                     StreamReader reader = new StreamReader(responseStream, Encoding.GetEncoding("utf-8"));
-                    String errorText = reader.ReadToEnd();
-                    // log errorText
+                    String errorText = reader.ReadToEnd();                   
                 }
                 throw;
             }
@@ -50,7 +49,6 @@ namespace WindowsFormsApplication1
         {
             string isbn = tbISBN.Text;
             laResult.Text = GET("https://www.googleapis.com/books/v1/volumes?q=isbn:"+isbn);
-
             bookDetails = JObject.Parse(laResult.Text);
         }
 
