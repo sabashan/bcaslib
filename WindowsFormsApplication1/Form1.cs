@@ -19,7 +19,7 @@ namespace WindowsFormsApplication1
             InitializeComponent();
         }
 
-        JObject bookDetails=null;
+        JObject bookDetails = null;
 
         string GET(string url)
         {
@@ -39,7 +39,7 @@ namespace WindowsFormsApplication1
                 using (Stream responseStream = errorResponse.GetResponseStream())
                 {
                     StreamReader reader = new StreamReader(responseStream, Encoding.GetEncoding("utf-8"));
-                    String errorText = reader.ReadToEnd();                   
+                    String errorText = reader.ReadToEnd();
                 }
                 throw;
             }
@@ -48,14 +48,14 @@ namespace WindowsFormsApplication1
         private void btnSearch_Click(object sender, EventArgs e)
         {
             string isbn = tbISBN.Text;
-            laResult.Text = GET("https://www.googleapis.com/books/v1/volumes?q=isbn:"+isbn);
+            laResult.Text = GET("https://www.googleapis.com/books/v1/volumes?q=isbn:" + isbn);
             bookDetails = JObject.Parse(laResult.Text);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             label2.Text = (bookDetails["items"].First["volumeInfo"])["title"].ToString();
-            string iamgePath="http://books.google.com/books/content?id=7plQAAAAMAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api";
+            string iamgePath = "http://books.google.com/books/content?id=7plQAAAAMAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api";
             pictureBox2.ImageLocation = iamgePath;
         }
     }
